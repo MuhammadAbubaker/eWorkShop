@@ -1,0 +1,41 @@
+<div class="form-heading"> 
+    <div class="row">
+        <div class="col-6">
+                 <h4><i class="fa fa-list-ol"></i> Tickets </h4>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-info float-right" (click)="addTicket()">
+                <i class="fa fa-ticket"></i> New Ticket</button>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="5" svSortBy="name"
+    svSortOrder="asc">
+    <thead>
+        <tr>
+            <th>
+                <sv-default-sorter by="name">Name</sv-default-sorter>
+            </th>
+            <th>Shipped</th>
+            <th>Order ID</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of sv.data">
+            <td>{{ item.customerName }}</td>
+            <td>{{ item.isShipped == true ? 'Yes' : 'No' }}</td>
+            <td>{{ item.orderID }}</td>
+            <!-- class="text-right" -->
+            <td>{{ item.shipperCity | uppercase }}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                <sv-bootstrap-paginator [rowsOnPageSet]="[5, 10, 25]"></sv-bootstrap-paginator>
+            </td>
+        </tr>
+    </tfoot>
+</table>
